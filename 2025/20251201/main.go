@@ -22,13 +22,13 @@ import (
 func main() {
 	d := Dial{
 		currPosition:   50,
-		incrementCount: 99,
+		incrementCount: 100, // 99, shift by 1
 	}
 
 	currPosition := d.currPosition
 	count := 0
 
-	parsedInput := parseInputString(sampleStr)
+	parsedInput := parseInputString(inputStr)
 
 	for i := range parsedInput {
 		currPosition = d.Adjust(parsedInput[i])
@@ -49,6 +49,10 @@ type Dial struct {
 
 func (d Dial) Adjust(increment int) int {
 	position := (d.currPosition + increment) % d.incrementCount
+
+	if position < 0 {
+		position += d.incrementCount
+	}
 
 	return position
 }
