@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 /*
 - parse input into distinct Range instances
@@ -10,18 +13,26 @@ import "fmt"
 */
 
 func main() {
-	count := 0
+	var count int64 = 0
 	for _, r := range parsedInput {
-		fmt.Println("range", r)
 		for j := r.Start; j <= r.End; j++ {
-			validate(j)
+			value := validate(j)
+			count += value
 		}
 	}
 
 	fmt.Println(count)
 }
 
-func validate(number int64) int64 {
-	fmt.Println("validating", number)
-	return number // placeholder - if invalid return number, else return 0
+func validate(num int64) int64 {
+	str := strconv.FormatInt(num, 10)
+	len := len(str)
+	mid := len / 2
+	firstHalf := str[:mid]
+	secondHalf := str[mid:]
+	if firstHalf == secondHalf {
+		return num
+	}
+
+	return 0
 }
