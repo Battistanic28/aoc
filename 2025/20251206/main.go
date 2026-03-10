@@ -23,7 +23,6 @@ func main() {
 	fmt.Println(result)
 }
 
-// need to convert from string to int here
 func getColumnSlice(matrix [][]string, col int) []int {
 	s := []int{}
 	for row := range len(matrix) - 1 {
