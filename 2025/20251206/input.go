@@ -4,22 +4,23 @@ import (
 	"strings"
 )
 
-func getInputMatrix(str string) [][]string {
+func getInputMatrix(str string) ([][]string, int, int) {
 	r := strings.Split(strings.TrimSpace(str), "\n")
 
 	rows := len(r)
-	cols := len(r[0])
+	cols := len(strings.Fields(r[0]))
 	matrix := make([][]string, rows)
 
 	for i := range matrix {
 		matrix[i] = make([]string, cols)
+		fields := strings.Fields(r[i])
 
-		for j, ch := range r[i] {
+		for j, ch := range fields {
 			matrix[i][j] = string(ch)
 		}
 	}
 
-	return matrix
+	return matrix, rows, cols
 }
 
 var inputStr = `
